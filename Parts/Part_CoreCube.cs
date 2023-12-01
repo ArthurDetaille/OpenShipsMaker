@@ -7,6 +7,7 @@ public class Part_CoreCube : PlacedPart
     private void Update() {
         if (Input.GetKeyDown(KeyCode.V)) { PasteAndLoadFromClipBoard(); }
         if (Input.GetKeyDown(KeyCode.C)) { LoadAndCopyToClipboard(); }
+        if (Input.GetKeyDown(KeyCode.X)) { DestroyChilds(); }
     }
 
     private void PasteAndLoadFromClipBoard() {

@@ -50,18 +50,9 @@ public class PlacedPart : MonoBehaviour
         return props + ")";
     }
 
-    // PLACEMENT
-    // placement is handled on the Part's side
-    // this can be used through overloading to create custom placement mechanisms
-    
-    // this is called when left click is pressed
-    public void OnStartPlacement() {
-
-    }
-
-    // this is called when left click is released
-    public void OnEndPlacement() {
-
+    // DESTROY
+    public void DestroyChilds() {
+        foreach(Anchor anchor in anchors) { anchor.DestroyChild(); }
     }
 
 

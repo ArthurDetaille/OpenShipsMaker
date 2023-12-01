@@ -44,6 +44,14 @@ public class Anchor : MonoBehaviour
         SetTransform(ghost);
     }
 
+    public void DestroyChild() {
+        if (child_part == null) return;
+
+        Anchor[] child_anchors = child_part.GetAnchors();
+        foreach (Anchor anchor in child_anchors) { anchor.DestroyChild(); }
+        Destroy(child_part.gameObject);
+    }
+
     // A common function to SnapGhost and attach_parent
     // so i can change everything in the same place
     // in order for the ghost part and the actual placed part to look the same
