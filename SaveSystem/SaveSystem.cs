@@ -6,13 +6,13 @@ using UnityEngine;
 public struct SaveAnchorResult {
     // cette struct est la preuve que je suis le Hitler du jeu vidéo
     public Part part;
-    public float rotation;
     public string[] anchors_content;
+    public Dictionary<string, float> proprieties;
 
-    public SaveAnchorResult(Part part, string[] anchors_content, float rotation = 0f) {
+    public SaveAnchorResult(Part part, string[] anchors_content, Dictionary<string, float> props) {
         this.part = part;
         this.anchors_content = anchors_content;
-        this.rotation = rotation;
+        this.proprieties = props;
     }
 
     // l'idée c'est dans le cas d'une ancre vide, on retourne un anchors_content null
@@ -31,6 +31,14 @@ public struct BuildAnimationProfile {
         this.duration = duration;
         this.delay = delay;
     }
+}
+
+public enum AccumulatorType {
+    STAND_BY,
+    STRING_ID,
+    PROPRIETES,
+    FLUSH_ANCHORS,
+    ANCHORS
 }
 
 public class SaveSystem : MonoBehaviour {
@@ -52,12 +60,15 @@ public class SaveSystem : MonoBehaviour {
     
     // SAVE SYSTEM FUNCTIONS
     public SaveAnchorResult ParseAnchorContentFromString(string content, bool getPart) {
-        if (content == null || content == "") return new SaveAnchorResult(parts[0], null);
+        if (content == null || content == "") return new SaveAnchorResult(parts[0], null, null);
+
+        AccumulatorType accumulatorType = AccumulatorType.STRING_ID;
 
         int count = 0;
         int string_length = content.Length;
-        string accumulator = "";
-        string pre_token = "";
+        string anchors = "";
+        string props = "";
+        string stringID = "";
 
         int next_anchor_ptr = 0;
         
@@ -66,44 +77,81 @@ public class SaveSystem : MonoBehaviour {
 
         for (int i = 0 ; i < string_length; i++) {
             char curr = content[i];
+            bool skip = false;
 
             switch (curr) {
+                case ';' :
+                    if (count == 1) accumulatorType = AccumulatorType.FLUSH_ANCHORS;
+                    break;
+
                 case '{' :
-                    count ++;
-                    if (count > 1) accumulator += curr;
+                    count++;
+                    accumulatorType = AccumulatorType.ANCHORS;
+                    if(count == 1) skip = true;
                     break;
 
                 case '}' :
-                    count --;
-                    if (count >= 1) accumulator += curr;
+                    count--;
+                    accumulatorType = AccumulatorType.ANCHORS;
+                    if(count == 0) accumulatorType = AccumulatorType.FLUSH_ANCHORS;
                     break;
 
-                case ';' :
-                    if (count != 1) {
-                        accumulator += curr;
-                        break;
-                    }
+                case '(' :
+                    if (count >= 1) break;
+                    accumulatorType = AccumulatorType.PROPRIETES;
+                    skip = true;
+                    break;
 
-                    // si accumulator est null ou vide il faut tout de même le pousser dans anchors_content
-                    // puisque l'ordre de construction importe !
-                    anchors_content[next_anchor_ptr] = accumulator;
-                    accumulator = "";
+                case ')' :
+                    if (count >= 1) break;
+                    accumulatorType = AccumulatorType.STAND_BY;
+                    skip = true;
+                    break;
+            }
+
+            if (skip) continue;
+
+            switch (accumulatorType) {
+                case AccumulatorType.STAND_BY :
+                    break;
+
+                case AccumulatorType.STRING_ID :
+                    stringID += curr;
+                    break;
+
+                case AccumulatorType.PROPRIETES :
+                    props += curr;
+                    break;
+
+                case AccumulatorType.ANCHORS :
+                    anchors += curr;
+                    break;
+
+                case AccumulatorType.FLUSH_ANCHORS :
+                    anchors_content[next_anchor_ptr] = anchors;
                     next_anchor_ptr ++;
-                    break;
-
-                default :
-                    if (count >= 1) accumulator += curr;
-                    else { pre_token += curr; }
+                    anchors = "";
+                    accumulatorType = AccumulatorType.ANCHORS;
                     break;
             }
         }
 
-        if (!getPart) return new SaveAnchorResult(parts[0], anchors_content);
+        if (!getPart) return new SaveAnchorResult(parts[0], anchors_content, null);
 
-        string[] tokens = pre_token.Split(":");
-        float rotation = 0f;
-        if (tokens.Length > 1) rotation = float.Parse(tokens[1]);
-        return new SaveAnchorResult(parts_stringID_reference[tokens[0]], anchors_content, rotation);
+        Dictionary<string, float> proprieties = ParseProprietesFromString(props);
+        return new SaveAnchorResult(parts_stringID_reference[stringID], anchors_content, proprieties);
+    }
+
+    public Dictionary<string, float> ParseProprietesFromString(string proprietes) {
+        Dictionary<string, float> dict = new Dictionary<string, float>();
+        string[] tokens = proprietes.Split(",");
+        
+        foreach(string token in tokens) {
+            string[] values = token.Split('=');
+            dict.Add(values[0], float.Parse(values[1]));
+        }
+        
+        return dict;
     }
 
 

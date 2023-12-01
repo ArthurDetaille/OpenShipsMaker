@@ -22,15 +22,14 @@ public class PlacedPart : MonoBehaviour
     // format being "one{;;two:2{three:0{};three:1{}};;}"
     protected string SavedAttached() {
         // Attention : C'est très moche mais ça marche...
-        string rotation = "";
-        if (part.can_rotate) rotation = ":" + parent_anchor.get_rotation();
+        string proprietes = BuildProprietesString();
         
         if (part.sid == "" || part.sid == null) {
             Application.Quit();
             Debug.LogError("stringId is null or empty for this part!");
         }
 
-        string data = part.sid + rotation + "{";
+        string data = part.sid + proprietes + "{";
         
         for (int i = 0; i < anchors.Length; i++) {
             Anchor anchor = anchors[i];
@@ -40,6 +39,15 @@ public class PlacedPart : MonoBehaviour
         }
 
         return data + "}";
+    }
+
+    // Cette fonction est à surcharger pour chaque surcharge de PlacedPart
+    // (si nécessaire)
+    protected string BuildProprietesString() {
+        string props = "(";
+        if (part.can_rotate) props += "rotation=" + parent_anchor.get_rotation();
+
+        return props + ")";
     }
 
     // PLACEMENT

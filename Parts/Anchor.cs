@@ -65,7 +65,8 @@ public class Anchor : MonoBehaviour
         attach_part(result.part);
 
         if (result.part.can_rotate) {
-            this.transform.RotateAround(this.transform.forward, result.rotation * Mathf.PI / 2f);
+            float rot = result.proprieties["rotation"];
+            this.transform.RotateAround(this.transform.forward, rot * Mathf.PI / 2f);
         }
 
         Anchor[] part_anchors = child_part.GetAnchors();
