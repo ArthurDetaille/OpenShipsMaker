@@ -4,24 +4,16 @@ using UnityEngine;
 public struct EditorProfile {
     public string name;
     public bool can_player_move;
+    public KeyCode call_keyCode;
 }
 
 public class Editor : MonoBehaviour {
-    public EditorProfile profile;
+    protected abstract EditorProfile profile;
 
-    public void Call() {
+    protected abstract void Call();
+    protected abstract void Close();
 
-    }
+    protected abstract void EditorLogic();
 
-    public void Close() {
-
-    }
-
-    public void OnUpdate() {
-
-    }
-
-    public void Display() {
-        
-    }
+    public EditorProfile GetEditorProfile() { return profile; }
 }

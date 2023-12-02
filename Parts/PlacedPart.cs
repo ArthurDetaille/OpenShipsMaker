@@ -22,7 +22,7 @@ public class PlacedPart : MonoBehaviour
     // format being "one{;;two:2{three:0{};three:1{}};;}"
     protected string SavedAttached() {
         // Attention : C'est très moche mais ça marche...
-        string proprietes = BuildProprietesString();
+        string proprietes = '(' + BuildProprietesString() + ')';
         
         if (part.sid == "" || part.sid == null) {
             Application.Quit();
@@ -43,11 +43,11 @@ public class PlacedPart : MonoBehaviour
 
     // Cette fonction est à surcharger pour chaque surcharge de PlacedPart
     // (si nécessaire)
-    protected string BuildProprietesString() {
-        string props = "(";
+    public virtual string BuildProprietesString() {
+        string props = "";
         if (part.can_rotate) props += "rotation=" + parent_anchor.get_rotation();
 
-        return props + ")";
+        return props;
     }
 
     // DESTROY

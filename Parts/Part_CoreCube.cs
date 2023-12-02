@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using System;
 
 public class Part_CoreCube : PlacedPart
 {
@@ -8,6 +9,10 @@ public class Part_CoreCube : PlacedPart
         if (Input.GetKeyDown(KeyCode.V)) { PasteAndLoadFromClipBoard(); }
         if (Input.GetKeyDown(KeyCode.C)) { LoadAndCopyToClipboard(); }
         if (Input.GetKeyDown(KeyCode.X)) { DestroyChilds(); }
+    }
+
+    public override string BuildProprietesString() {
+        return "name=ships";
     }
 
     private void PasteAndLoadFromClipBoard() {
