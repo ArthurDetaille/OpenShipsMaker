@@ -8,7 +8,7 @@ public struct GameEditorProfile {
 }
 
 public abstract class GameEditor : MonoBehaviour {
-    protected GameEditorProfile profile;
+    [SerializeField] protected GameEditorProfile profile;
 
     public abstract void Call();
     public abstract void Close();

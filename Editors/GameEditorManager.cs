@@ -1,11 +1,16 @@
 using UnityEngine;
 
 public class GameEditorManager : MonoBehaviour {
-    public GameEditor[] editors;
     public PlayerController_FPS playerController;
 
-    public GameEditor pause_editor;
-    public GameEditor active_editor;
+    [HideInInspector]   public GameEditor pause_editor;
+    [HideInInspector]   public GameEditor active_editor;
+    [HideInInspector]   public GameEditor[] editors;
+
+    public void Awake() {
+        editors = this.GetComponents<GameEditor>();
+        pause_editor = this.GetComponent<PauseGameEditor>();
+    }
 
     public void Update() {
         // check for change
