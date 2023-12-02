@@ -1,25 +1,26 @@
 using UnityEngine;
 
-public class EditorManager : MonoBehaviour {
-    public Editor[] editors;
+public class GameEditorManager : MonoBehaviour {
+    public GameEditor[] editors;
     public PlayerController_FPS playerController;
 
-    public Editor pause_editor;
-    public Editor active_editor;
+    public GameEditor pause_editor;
+    public GameEditor active_editor;
 
     public void Update() {
         // check for change
         if (Input.GetKeyDown(KeyCode.Escape)) { SwitchEditor(pause_editor); return; }
 
         for (int i = 0; i < editors.Length; i++) {
-            if (Input.GetKeyDown(editors[i].call_keyCode)) {
+            GameEditorProfile profile = editors[i].GetGameEditorProfile();
+            if (Input.GetKeyDown(profile.call_keyCode)) {
                 SwitchEditor(editors[i]);
                 return;
             }
         }
     }
 
-    public void SwitchEditor(Editor editor_to_call) {
+    public void SwitchEditor(GameEditor editor_to_call) {
         active_editor.Close();
         editor_to_call.Call();
 
