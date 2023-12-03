@@ -12,6 +12,8 @@ I am sorry for the french/english comments in the code. This may be unreadable f
 
 **Introduction** : This is thought as an Open source project. This is made to be used, modified, forked, and build upon. Please feel free to do so. The most interesting parts (I think) are the `SaveSystem` and the `GameEditor` system. **I only push code that is error-free** on compile.
 
+**Dependencies** : Scripts sometimes uses the free library *LeanTween* wich can be found on the Unity MarketPlace.
+
 ### Contents
 1. SaveSystem
 2. GameEditor System
