@@ -11,7 +11,7 @@ To report any issue you may see in the code please go into the Issues tab on git
 2. GameEditor System
 3. User Interface
 4. Parts
-4. Parts Geometry Generation System
+5. Parts Geometry Generation System
 
 ### 1. Save System
 TODO
@@ -25,6 +25,6 @@ TODO
 ### 4. Parts
 TODO
 
-### 2. Parts Geometry Generation System
+### 5. Parts Geometry Generation System
 TODO
 
