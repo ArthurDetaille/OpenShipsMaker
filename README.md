@@ -1,5 +1,8 @@
 # SHIPS
 ## Open source Unity scripts for a space ship creation game
+
+![alt text]([http://url/to/img.png](https://arthur-detaille.fr/res/imgs/OpenShipsMaker.png))
+
 ### Disclaimer & Introduction
 **Disclaimer** : Obviously the overall architecture as set in the unity's inspector is not conserved here. I may do it in the future, I don't really know. The goal here was to make the project public and comprehensible for a trained audience. I think this project reflect my way of doing thigs programmaticaly speaking.
 To report any issue you may see in the code please go into the Issues tab on github where I will look that up (and thank you!!)
