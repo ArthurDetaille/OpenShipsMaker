@@ -7,6 +7,7 @@ public class PlayerController_FPS : MonoBehaviour
     [Header("References")]
     [SerializeField] private Camera fps_camera;
     [SerializeField] private GameObject flashlight;
+    [SerializeField] private GameEditorManager editorManager;
 
     [Header("Movements")]
     [SerializeField] private float force_amplitude;
@@ -25,14 +26,16 @@ public class PlayerController_FPS : MonoBehaviour
     void Start()
     {
         last_mouse_position = Input.mousePosition;
+        editorManager.SetPlayerControllerReference(this);
     }
 
     // Update is called once per frame
     void Update()
     {
-        if (!PartsPlacementManager.self.is_paused()) HandleMovement();
+        // if (!PartsPlacementManager.self.is_paused()) HandleMovement();
 
-        if (Input.GetKeyDown(KeyCode.F)) { ToggleFlashLight(); }
+        bool can_move = editorManager.GetCurrentEditor().GetGameEditorProfile().can_player_move;
+        if (can_move) { HandleMovement(); }
     }
 
     public void ToggleFlashLight() { SetFlashLight(!is_flashlight_on); }   
@@ -60,4 +63,6 @@ public class PlayerController_FPS : MonoBehaviour
 
         last_mouse_position = Input.mousePosition;
     }
+
+    public Camera GetFPSCamera() { return this.fps_camera; }
 }

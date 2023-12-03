@@ -8,7 +8,7 @@ public class Part_CoreCube : PlacedPart
     private void Update() {
         if (Input.GetKeyDown(KeyCode.V)) { PasteAndLoadFromClipBoard(); }
         if (Input.GetKeyDown(KeyCode.C)) { LoadAndCopyToClipboard(); }
-        if (Input.GetKeyDown(KeyCode.X)) { DestroyChilds(); }
+        if (Input.GetKeyDown(KeyCode.X)) { DestroyCurrentShip(); }
     }
 
     public override string BuildProprietesString() {
@@ -38,5 +38,10 @@ public class Part_CoreCube : PlacedPart
         GUIUtility.systemCopyBuffer = content;
 
         PopupManager.instance.display_popup("Saved a ship to clipBoard!", 0f, PopupStyle.Medium);
+    }
+
+    private void DestroyCurrentShip() {
+        PopupManager.instance.display_popup("Deleted ship", 0f, PopupStyle.Medium);
+        DestroyChilds();
     }
 }

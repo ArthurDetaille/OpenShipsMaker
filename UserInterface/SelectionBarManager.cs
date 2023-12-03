@@ -24,7 +24,7 @@ public struct SelectionIcon {
 
 public class SelectionBarManager : MonoBehaviour
 {
-    [SerializeField] private PartsPlacementManager ppm;
+    [SerializeField] private PlacementGameEditor placementGameEditor;
 
     [Header("UI Reference")]
     [SerializeField] private Transform part_ui_container;
@@ -52,7 +52,7 @@ public class SelectionBarManager : MonoBehaviour
     }
 
     public void SelectCurrentPart() {
-        Part part = ppm.parts[ppm.currently_selected];
+        Part part = placementGameEditor.GetCurrentPart();
         UpdateAndAnimatePartNameText(part);
 
         for (int i = 0; i < icons.Length; i++) {
@@ -84,12 +84,15 @@ public class SelectionBarManager : MonoBehaviour
     }
 
     public void Bar_Populate() {
-        icons = new SelectionIcon[ppm.parts.Length];
-        for (int i = 0; i < ppm.parts.Length; i++) {
-            Part part = ppm.parts[i];
+        int partsCount = placementGameEditor.GetPartsCount();
+        icons = new SelectionIcon[partsCount];
+
+        for (int i = 0; i < partsCount; i++) {
+            Part part = placementGameEditor.GetPartAtIndex(i);
+
             RawImage icon = Instantiate(part_ui_icon) as RawImage;
             icon.transform.SetParent(part_ui_container);
-            icon.texture = iconRenderer.render_icon(ppm.parts[i], 512);
+            icon.texture = iconRenderer.render_icon(part, 512);
 
             icons[i] = new SelectionIcon(icon, IconState.SELECTED);
         }
@@ -99,8 +102,8 @@ public class SelectionBarManager : MonoBehaviour
         loadingScreenManager.hide_loading_screen();
     }
 
-    public void SetBuildMode(bool build_mode) {
-        float start = (build_mode ? 1f : 0f);
+    public void SetVisibility(bool visible) {
+        float start = (visible ? 1f : 0f);
         float end = 1f - start;
         LeanTween.value(this.gameObject, start, end, 0.2f).setOnUpdate((value) => {
             Vector2 pos = this.GetComponent<RectTransform>().anchoredPosition;
@@ -108,6 +111,7 @@ public class SelectionBarManager : MonoBehaviour
         });
     }
 
-    private SelectionIcon GetCurrentIcon() { return icons[ppm.currently_selected]; }
-    private void SetCurrentIconState(IconState state) {icons[ppm.currently_selected].state = state; }
+    public SelectionIcon GetCurrentIcon() { return icons[placementGameEditor.GetCurrentPartSelectionIndex()]; }
+    public void SetCurrentIconState(IconState state) {icons[placementGameEditor.GetCurrentPartSelectionIndex()].state = state; }
+    public void SetPlacementGameEditorReference(PlacementGameEditor gameEditor) { this.placementGameEditor = gameEditor; }
 }
