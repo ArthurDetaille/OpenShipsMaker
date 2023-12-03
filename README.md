@@ -10,15 +10,21 @@ To report any issue you may see in the code please go into the Issues tab on git
 1. SaveSystem
 2. GameEditor System
 3. User Interface
-4. Part
+4. Parts
+4. Parts Geometry Generation System
 
 ### 1. Save System
-```cs
-public class SaveSystem : MonoBehaviour
-```
+TODO
 
-### 2. GameEditor
-```cs
-public abstract class GameEditor : MonoBehaviour {...}
-public class GameEditorManager : MonoBehaviour {...}
-```
+### 2. GameEditor System
+TODO
+
+### 3. User Interface
+TODO
+
+### 4. Parts
+TODO
+
+### 2. Parts Geometry Generation System
+TODO
+
