@@ -8,7 +8,9 @@
 I think this project reflect my way of doing things (programmaticaly speaking).
 To report any issue you may see in the code, please go into the *Issues* tab on github where I will look that up (and thank you!!)
 
-**Introduction** : The most interesting parts (I think) are the `SaveSystem` and the `GameEditor` system.
+I am sorry for the french/english comments in the code. This may be unreadable for non-french speakers.... I am sorry :/
+
+**Introduction** : This is tought as an Open source project. This is made to be used, modified, forked, and build upon. Please feel free to do so. The most interesting parts (I think) are the `SaveSystem` and the `GameEditor` system. **I only push code that is error-free** on compile.
 
 ### Contents
 1. SaveSystem
