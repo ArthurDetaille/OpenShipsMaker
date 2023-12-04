@@ -22,7 +22,7 @@ I am sorry for the french/english comments in the code. This may be unreadable f
 5. Procedural Parts Geometry System
 
 ### 1. Save System
-To understand the save system one needs to understand the architectures of ships in the game. Every parts (may be a cube, a thruster, ...) is a child of an anchor wich is itself, a child of a part. The anchor code can be found in the `Parts/Anchor.cs` script. A part may have zero, one or many anchors. Each anchors can be empty (i.e. no parts are attached) or full. It can contain atmost ONE part. Parts attached to anchors are called `PlacedPart` and can be found under the `Parts/PlacedPart.cs` script. Some parts can derive from `PlacedPart` (e.g. 'The Core' wich is the central piece present in the scene at the start is derived from it. Devices wich are activable PlacedParts are also derived from it).
+To understand the save system one needs to understand the architecture of ships in the game. Every parts (may be a cube, a thruster, ...) is a child of an anchor wich is itself, a child of a part (*PlacedPart -> Anchor -> PlacedPart -> ... -> PlacedPart*). The anchor code can be found in the `Parts/Anchor.cs` script. A part may have zero, one or many anchors. Each anchors can be empty (i.e. no parts are attached) or full. It can contain atmost ONE part. Parts attached to anchors are called `PlacedPart` and can be found under the `Parts/PlacedPart.cs` script. Some parts can derive from `PlacedPart` (e.g. 'The Core' wich is the central piece present in the scene at the start is derived from it. Devices wich are activable PlacedParts are also derived from it).
 
 The save system revolves around two scripts `Parts/Anchor.cs` and `SaveSystem/SaveSystem.cs` wich I encourage you to explore.
 
