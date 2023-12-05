@@ -55,7 +55,11 @@ public class SaveSystem : MonoBehaviour {
 
     // ENGINE FUNCTIONS
     private void Awake() { instance = this; }
-    private void Start() { BuildStringIDReferenceDictionary(); }
+    private void Start() {
+        PartsPool pool = this.GetComponent<PartsPool>();
+        if (pool != null) this.parts = pool.parts;
+        BuildStringIDReferenceDictionary();
+    }
 
     
     // SAVE SYSTEM FUNCTIONS
@@ -170,6 +174,6 @@ public class SaveSystem : MonoBehaviour {
 
     // GETTERS AND SETTERS
     // for an exterior script to set parts : centralization's sake
-    public void SetPartsPool(Part[] parts) { this.parts = parts; }
+    public void SetPartsPool(Part[] parts) { this.parts = parts; BuildStringIDReferenceDictionary(); }
     public Part[] GetPartsPool() { return parts; }
 }

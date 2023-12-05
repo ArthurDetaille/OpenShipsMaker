@@ -17,6 +17,7 @@ public class Part_CoreCube : PlacedPart
 
     private void PasteAndLoadFromClipBoard() {
         string clipBoard = GUIUtility.systemCopyBuffer;
+        Debug.Log(clipBoard);
 
         if (clipBoard == "" || clipBoard == null) {
             PopupManager.instance.display_popup("Your clipboard is empty!", 0f, PopupStyle.Medium);

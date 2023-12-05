@@ -47,9 +47,8 @@ public class PlayerController_FPS : MonoBehaviour
 
     public void HandleMovement() {
         // TODO : fix ultra high sensiblity in builds
-        Vector3 deltaMouse = new Vector2(Input.GetAxis("look_up"), Input.GetAxis("look_right")) * Time.deltaTime;
-        this.transform.RotateAround(this.transform.position, Vector3.up, deltaMouse.x * sensitvity);
-        fps_camera.transform.RotateAround(fps_camera.transform.position, this.transform.right, -deltaMouse.y * sensitvity);
+        this.transform.RotateAround(this.transform.up, Input.GetAxis("look_right") * sensitvity * Time.deltaTime);
+        fps_camera.transform.RotateAround(this.transform.right, -Input.GetAxis("look_up") * sensitvity * Time.deltaTime);
 
         flashlight.transform.rotation = fps_camera.transform.rotation;
 

@@ -38,16 +38,15 @@ public class GameEditorManager : MonoBehaviour {
     }
 
     // EDITORS MANAGMENT
-    public void SwitchEditor(GameEditor editor_to_call) {
-        active_editor.Close();
-
+    public void SwitchEditor(GameEditor editor_to_call) {        
         Debug.Log($"Switch game editor {active_editor.GetName()} -> {editor_to_call.GetName()}");
 
         last_active_editor = active_editor;
         active_editor = editor_to_call;
 
-        active_editor.Call();
-        active_editor.EditorLogic();
+        last_active_editor.Close();
+        editor_to_call.Call();
+        editor_to_call.EditorLogic();
     }
 
     public void SetEditor(GameEditor e) {
