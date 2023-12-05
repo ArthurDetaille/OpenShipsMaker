@@ -31,6 +31,9 @@ public class Part_CoreCube : PlacedPart
             anchors[i].BuildPartFromString(r);
         }
 
+        ShipPhysicsManager phManager = this.GetComponent<ShipPhysicsManager>();
+        if (phManager != null) phManager.UpdateMass(); 
+
         PopupManager.instance.display_popup("Loaded a ship from clipBoard!", 0f, PopupStyle.Medium);
     }
 

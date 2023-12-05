@@ -88,11 +88,11 @@ public class Anchor : MonoBehaviour
     }
 
     // GETTERS AND SETTERS
-    public void         set_child_part(PlacedPart part) { child_part = part; }
-    public PlacedPart   get_child_part() { return child_part; }
+    public void         SetChildPart(PlacedPart part) { child_part = part; }
+    public PlacedPart   GetChildPart() { return child_part; }
 
     public void         set_parent_part(PlacedPart part) { parent_part = part; }
     public PlacedPart   get_parent_part() { return parent_part; }
 
-    public float        get_rotation() { return this.rotation; }
+    public float        GetRotation() { return this.rotation; }
 }

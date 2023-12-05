@@ -34,7 +34,7 @@ public class PlacedPart : MonoBehaviour
         for (int i = 0; i < anchors.Length; i++) {
             Anchor anchor = anchors[i];
             string separator = (i == anchors.Length - 1) ? "" : ";";
-            string part_string = (anchor.get_child_part() == null) ? "" : anchor.get_child_part().SavedAttached();
+            string part_string = (anchor.GetChildPart() == null) ? "" : anchor.GetChildPart().SavedAttached();
             data += part_string + separator;
         }
 
@@ -45,7 +45,7 @@ public class PlacedPart : MonoBehaviour
     // (si nécessaire)
     public virtual string BuildProprietesString() {
         string props = "";
-        if (part.can_rotate) props += "rotation=" + parent_anchor.get_rotation();
+        if (part.can_rotate) props += "rotation=" + parent_anchor.GetRotation();
 
         return props;
     }
@@ -59,6 +59,10 @@ public class PlacedPart : MonoBehaviour
     // GETTERS AND SETTERS
     public void         SetParentPart(PlacedPart part) { parent_part = part; }
     public PlacedPart   GetParentPart() { return parent_part; }
+    
     public void         SetParentAnchor(Anchor anchor) { parent_anchor = anchor; }
+    public Anchor       GetParentAnchor() { return parent_anchor; }
+    
+    public Part         GetPartObject() { return this.part; }
     public Anchor[]     GetAnchors() { return anchors; }
 }
