@@ -7,12 +7,14 @@ public struct SaveAnchorResult {
     // cette struct est la preuve que je suis le Hitler du jeu vidéo
     public Part part;
     public string[] anchors_content;
-    public Dictionary<string, float> proprieties;
+    public Dictionary<string, string> properties;
 
-    public SaveAnchorResult(Part part, string[] anchors_content, Dictionary<string, float> props) {
+    public SaveAnchorResult(Part part, string[] anchors_content, Dictionary<string, string> props) {
         this.part = part;
         this.anchors_content = anchors_content;
-        this.proprieties = props;
+        this.properties = props;
+        
+        if (props == null) props = new Dictionary<string, string>();
     }
 
     // l'idée c'est dans le cas d'une ancre vide, on retourne un anchors_content null
@@ -142,17 +144,17 @@ public class SaveSystem : MonoBehaviour {
 
         if (!getPart) return new SaveAnchorResult(parts[0], anchors_content, null);
 
-        Dictionary<string, float> proprieties = ParseProprietesFromString(props);
-        return new SaveAnchorResult(parts_stringID_reference[stringID], anchors_content, proprieties);
+        Dictionary<string, string> properties = ParseProprietesFromString(props);
+        return new SaveAnchorResult(parts_stringID_reference[stringID], anchors_content, properties);
     }
 
-    public Dictionary<string, float> ParseProprietesFromString(string proprietes) {
-        Dictionary<string, float> dict = new Dictionary<string, float>();
+    public Dictionary<string, string> ParseProprietesFromString(string proprietes) {
+        Dictionary<string, string> dict = new Dictionary<string, string>();
         string[] tokens = proprietes.Split(",");
         
         foreach(string token in tokens) {
             string[] values = token.Split('=');
-            dict.Add(values[0], float.Parse(values[1]));
+            dict.Add(values[0], values[1]);
         }
         
         return dict;

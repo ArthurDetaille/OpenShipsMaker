@@ -71,9 +71,10 @@ public class Anchor : MonoBehaviour
     public void BuildPartFromString(SaveAnchorResult result) {
         if (result.anchors_content == null) return;
         attach_part(result.part);
+        this.GetChildPart().SetFromProprietes(result);
 
         if (result.part.can_rotate) {
-            float rot = result.proprieties["rotation"];
+            float rot = float.Parse(result.properties["rotation"]);
             this.transform.RotateAround(this.transform.forward, rot * Mathf.PI / 2f);
         }
 
@@ -92,7 +93,7 @@ public class Anchor : MonoBehaviour
     public PlacedPart   GetChildPart() { return child_part; }
 
     public void         set_parent_part(PlacedPart part) { parent_part = part; }
-    public PlacedPart   get_parent_part() { return parent_part; }
+    public PlacedPart   GetParentPart() { return parent_part; }
 
     public float        GetRotation() { return this.rotation; }
 }

@@ -56,6 +56,9 @@ public class PlacedPart : MonoBehaviour
         foreach(Anchor anchor in anchors) { anchor.DestroyChild(); }
     }
 
+    // ABSTRACT PROPRIETES
+    public virtual void SetFromProprietes(SaveAnchorResult result) {}
+
 
     // GETTERS AND SETTERS
     public void         SetParentPart(PlacedPart part) { parent_part = part; }
