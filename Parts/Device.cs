@@ -18,15 +18,14 @@ public abstract class Device : PlacedPart {
         return props;
     }
 
-    private void Update() {
-        if (Input.GetKey(keycode)) HandleActivation();
-    }
+    // ENGINE FUNCTIONS
+    private void Update() { if (Input.GetKey(keycode)) HandleActivation(); }
 
     // ABSTRACT FUNCTIONS
     public abstract void HandleActivation();
 
     // RIGIDBODY HANDLER
-    public void LookForRigidbodyInParent() {
+    public void GetRigidbodyFromCore() {
         PlacedPart parent = GetParentPart();
         while(parent != null) { parent = parent.GetParentPart(); }
 
