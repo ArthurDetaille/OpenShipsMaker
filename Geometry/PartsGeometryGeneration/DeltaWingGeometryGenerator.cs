@@ -6,7 +6,7 @@ public class DeltaWingGeometryGenerator : PartGeometryGenerator {
     public static float WING_LENGTH     = 2.0f;
     public static float WING_WIDTH      = 0.1f;
     public static float TIP_Z           = .5f;
-    public static float ATTACK_LENGTH   = .2f;
+    public static float EDGE_LENGTH     = .2f;
 
     protected override Mesh GenerateGeometry() {
         Debug.Log("Generating mesh for Delta wing.");
@@ -40,17 +40,17 @@ public class DeltaWingGeometryGenerator : PartGeometryGenerator {
         vertices.Add(-f * WING_LENGTH                       + z * cpx);                             // 0        2 --- 3
         vertices.Add(-f * WING_LENGTH                       + r * cpx);                             // 1        |  /  |
                                                                                                     //          0 --- 1
-        vertices.Add(-f * (WING_LENGTH - ATTACK_LENGTH)     + z * cpx   + u * 0.5f * WING_WIDTH);   // 2        |  /  |
-        vertices.Add(-f * (WING_LENGTH - ATTACK_LENGTH)     + r * cpx   + u * 0.5f * WING_WIDTH);   // 3        4 --- 5
+        vertices.Add(-f * (WING_LENGTH - EDGE_LENGTH)       + z * cpx   + u * 0.5f * WING_WIDTH);   // 2        |  /  |
+        vertices.Add(-f * (WING_LENGTH - EDGE_LENGTH)       + r * cpx   + u * 0.5f * WING_WIDTH);   // 3        4 --- 5
                                                                                                     //      WING BACK VIEW
-        vertices.Add(-f * (WING_LENGTH - ATTACK_LENGTH)     + z * cpx   - u * 0.5f * WING_WIDTH);   // 4
-        vertices.Add(-f * (WING_LENGTH - ATTACK_LENGTH)     + r * cpx   - u * 0.5f * WING_WIDTH);   // 5
+        vertices.Add(-f * (WING_LENGTH - EDGE_LENGTH)       + z * cpx   - u * 0.5f * WING_WIDTH);   // 4
+        vertices.Add(-f * (WING_LENGTH - EDGE_LENGTH)       + r * cpx   - u * 0.5f * WING_WIDTH);   // 5
 
         vertices.Add( f * WING_LENGTH                       + z * cpx);                             // 6        3 --- 8
-        vertices.Add(-f * (WING_LENGTH - 2 * ATTACK_LENGTH) + r * cpx);                             // 7        |  /  |
+        vertices.Add(-f * (WING_LENGTH - 2 * EDGE_LENGTH)   + r * cpx);                             // 7        |  /  |
                                                                                                     //          7 --- 6
-        vertices.Add( f * (WING_LENGTH - ATTACK_LENGTH)     + z * cpx   + u * 0.5f * WING_WIDTH);   // 8        |  /  |
-        vertices.Add( f * (WING_LENGTH - ATTACK_LENGTH)     + z * cpx   - u * 0.5f * WING_WIDTH);   // 9        5 --- 9
+        vertices.Add( f * (WING_LENGTH - EDGE_LENGTH)       + z * cpx   + u * 0.5f * WING_WIDTH);   // 8        |  /  |
+        vertices.Add( f * (WING_LENGTH - EDGE_LENGTH)       + z * cpx   - u * 0.5f * WING_WIDTH);   // 9        5 --- 9
                                                                                                     //      WING FRONT VIEW
 
         return vertices.ToArray();
