@@ -5,6 +5,7 @@ using UnityEngine;
 public class PlacedPart : MonoBehaviour
 {
     // VARIABLES
+    [Header("Placed Part")]
     [SerializeField] private Part part;
     [SerializeField] public Transform build_origin;
     [SerializeField] protected Anchor[] anchors;

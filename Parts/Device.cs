@@ -1,13 +1,14 @@
 using UnityEngine;
 
 public abstract class Device : PlacedPart {
-    public string keycode = null;
+    [Header("Device settings")]
+    public KeyCode keycode;
     public float amplitude = 1.0f;
 
     protected Rigidbody rb;
 
     public override string BuildProprietesString() {
-        string kc_string = keycode == null ? "none" : keycode;
+        string kc_string = keycode.ToString();
         string props = $"amp={amplitude},kc={kc_string}";
 
         if (this.GetPartObject().can_rotate) {

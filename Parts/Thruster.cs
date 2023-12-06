@@ -1,6 +1,7 @@
 using UnityEngine;
 
 public class Thruster : Device {
+    [Header("Thruster settings")]
     public float BasePower = 1.0f;
 
     public override void HandleActivation() {
