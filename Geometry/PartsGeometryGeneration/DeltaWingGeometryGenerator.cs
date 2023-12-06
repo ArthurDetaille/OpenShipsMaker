@@ -71,11 +71,11 @@ public class DeltaWingGeometryGenerator : PartGeometryGenerator {
         triangles.AddRange(new int[]{7, 3, 8}); // attack edge top - 1
         triangles.AddRange(new int[]{7, 8, 6}); // attack edge top - 2
 
-        triangles.AddRange(new int[]{2, 8, 3}); // surface top
-        triangles.AddRange(new int[]{4, 5, 9}); // surface bottom
-
         triangles.AddRange(new int[]{5, 6, 9}); // attack edge bottom - 1
         triangles.AddRange(new int[]{5, 7, 6}); // attack edge bottom - 2
+
+        triangles.AddRange(new int[]{2, 8, 3}); // surface top
+        triangles.AddRange(new int[]{4, 5, 9}); // surface bottom
     
         return triangles.ToArray();
     }
