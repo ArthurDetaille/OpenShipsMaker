@@ -18,6 +18,8 @@ public class GameEditorManager : MonoBehaviour {
 
         active_editor = default_editor;
         active_editor.Call();
+
+        foreach (GameEditor e in editors) { e.SetManager(this); }
     }
 
     public void Update() {
@@ -70,4 +72,5 @@ public class GameEditorManager : MonoBehaviour {
     }
 
     public PlayerController_FPS GetPlayerControllerReference() { return this.playerController; }
+    public GameEditor GetLastActiveEditor() { return this.last_active_editor; }
 }

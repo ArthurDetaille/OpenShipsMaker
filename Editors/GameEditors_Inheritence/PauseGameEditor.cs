@@ -31,10 +31,14 @@ public class PauseGameEditor : GameEditor {
     }
 
     public void UIButtonResume() {
-
+        this.manager.SwitchEditor(this.manager.GetLastActiveEditor());
     }
 
-    public void UIButtonButtonQuit() {
+    public void UIButtonQuit() {
         Application.Quit();
+    }
+
+    public void UILaunchShip() {
+
     }
 }
